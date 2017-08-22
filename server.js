@@ -4,21 +4,23 @@ var bodyParser = require("body-parser");
 
 var app = express();
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 7000;
 
 //access to public folder
 app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//override with post having ?_method = DELETE
 app.use(methodOverride("_method"));
 
 //handlebars set up
-// var exphbs = require("express-handlebars");
-// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-// app.set("view engine", "handlebars");
+var exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
-//import controller folder for server.js to access routes
-// var routes = require("./controllers");
-// app.use("/", routes);
+//import controller
+var routes = require("./controllers/burgers_controller.js");
+app.use("/", routes);
 
 app.listen(PORT);

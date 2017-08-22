@@ -1,5 +1,5 @@
 //mysql connection
-var conenction = require("../config/connections.js");
+var connection = require("../config/connection.js");
 
 // adding ? to statements
 function printQuestionMarks(num) {
@@ -29,8 +29,9 @@ function printQuestionMarks(num) {
 
 
 var orm = {
-    all: function(tableInput, cb) {
-        var queryString = "SELECT * FROM" + tableInput + ";"
+    selectAll: function(tableInput, cb) {
+        var queryString = "SELECT * FROM " + tableInput + ";";
+
         connection.query(queryString, function(err, result) {
             if (err) {
                 throw err;
@@ -38,7 +39,7 @@ var orm = {
             cb(result);
         });
     },
-    create: function(table, cols, vals, cb) {
+    insertOne: function(table, cols, vals, cb) {
         var queryString = "INSERT INTO " + table;
         queryString += " (";
         queryString += cols.toString();
@@ -49,14 +50,14 @@ var orm = {
 
         console.log(queryString);
 
-        connection.query(queryString, vals, function(err, results){
+        connection.query(queryString, vals, function(err, result){
             if (err) {
                 throw err;
             }
             cb(result);
         });
     },
-    update: function(table, objColVals, condition, cb) {
+    updateOne: function(table, objColVals, condition, cb) {
         var queryString = "UPDATE " + table;
     
         queryString += " SET ";
@@ -72,20 +73,7 @@ var orm = {
     
           cb(result);
         });
-      },
-    delete: function(table, condition, cb) {
-        var queryString = "DELETE FROM " + table;
-        queryString += " WHERE ";
-        queryString += condition;
-
-        connection.query(queryString, function(err, result) {
-            if(err) {
-                throw err;
-            }
-
-            cb(result);
-        });
-    }
+      }
 
 };
 
