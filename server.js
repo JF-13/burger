@@ -6,10 +6,9 @@ var app = express();
 
 var PORT = process.env.PORT || 3000;
 
-//
-
-//express set up
+//access to public folder
 app.use(express.static("public"));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 
