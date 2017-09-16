@@ -4,6 +4,12 @@ body {
     filter:alpha(opacity=80);
 }
 
+.container {
+  margin-top: 30px;
+  background-color: rgb(235, 244, 66);
+  border-radius: 2%;
+}
+
 .header {
     text-align: center;
     vertical-align: middle;
@@ -17,4 +23,3 @@ body {
     vertical-align: middle;
     color: brown;
 }
-
